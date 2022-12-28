@@ -1,9 +1,10 @@
-import { Card, Typography } from "@mui/material";
+import { Card, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
-import p1 from "../../Assests/Image/1.jpg";
-import p2 from "../../Assests/Image/2.png";
-import p3 from "../../Assests/Image/3.png";
 import { DocType } from "./DocInterfaces";
+import classes from "./DocumentStyle";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DownloadIcon from "@mui/icons-material/Download";
 
 function Certificate(doc: DocType) {
   const [isHover, setIsHover] = useState(true);
@@ -16,73 +17,27 @@ function Certificate(doc: DocType) {
     setIsHover(true);
   };
 
-  var t;
-  if (doc.file === 1) {
-    t = p1;
-  } else if (doc.file === 2) {
-    t = p2;
-  } else {
-    t = p3;
-  }
-
   return (
     <>
-      {/* {isHover ? (
-        <img
-          src={t}
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-          style={{ height: "180px", width: "260px" }}
-        />
-      ) : (
-        <>
-        <img src={t} onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut} 
-        style={{ height: "180px", width: "260px" }} />
+      <Card
+        sx={classes.cardOuter}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
         <Card
-          onMouseOver={handleMouseOver}
-          onMouseOut={handleMouseOut}
-          sx={{
-            height: "180px",
-            width: "260px",
-            background: "black",
-            opacity: 0.6,
-            top: 68,
-            left: 20,
-            right: 0,
-            bottom: 0,
-            position: "absolute",
-            zIndex: 5,
-            color: "white",
-            textAlign: "center",
-            justifySelf: "center",
-          }}
+          sx={isHover ? classes.cardOverlay : classes.cardOverlayHover}
+        ></Card>
+        <img style={{ height: "180px" }} src={doc.file} alt={"img"} />
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={isHover ? classes.stack : classes.stackHover}
         >
-          <Typography sx={{position : "absolute", top : "45%", left : "50%"}}>
-            HI
-          </Typography>
-        </Card>
-        </>
-      )} */}
-
-      {/* {isHover ? 
-          <Card>
-
-          </Card>
-        :
-        
-        } */}
-
-        {/* <Card sx={{background : "#ddd", minHeight : "180px", zIndex : 1}}>
-          <img src={t} onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut} 
-            style={{ height: "180px", width: "260px" }} />
-          <Card sx={{minHeight: "100px", position: "relative", top}}>
-            
-          </Card>
-          
-        </Card> */}
-
+          <VisibilityIcon onClick={() => {console.log(doc.file);}}/>
+          <DeleteIcon onClick={() => {console.log(doc.file);}}/>
+          <DownloadIcon onClick={() => {console.log(doc.file);}}/>
+        </Stack>
+      </Card>
     </>
   );
 }
